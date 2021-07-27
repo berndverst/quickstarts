@@ -32,15 +32,19 @@ app.get('/order', (_req, res) => {
 
 app.post('/neworder', (req, res) => {
     const data = req.body.data;
+    const ttl = req.body.ttl;
     const orderId = data.orderId;
     console.log("Got a new order! Order ID: " + orderId);
 
     const state = [{
         key: "order",
-        value: data
+        value: data,
+        metadata: {
+            ttlInSeconds: ttl
+        }
     }];
 
-    fetch(stateUrl, {
+    fetch(stateUrl , {
         method: "POST",
         body: JSON.stringify(state),
         headers: {

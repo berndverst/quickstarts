@@ -13,7 +13,7 @@ dapr_url = "http://localhost:{}/v1.0/invoke/nodeapp/method/neworder".format(dapr
 n = 0
 while True:
     n += 1
-    message = {"data": {"orderId": n}}
+    message = {"data": {"orderId": n}, "ttl": "10"}
 
     try:
         response = requests.post(dapr_url, json=message, timeout=5)
